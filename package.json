@@ -1,0 +1,52 @@
+{
+  "name": "@unibeautify/beautifier-tslint",
+  "version": "0.0.1",
+  "description": "TSLint beautifier for Unibeautify",
+  "main": "dist/src/index.js",
+  "typings": "dist/src/index.d.ts",
+  "scripts": {
+    "prepublishOnly": "npm run build",
+    "build": "npm run clean && npm run compile",
+    "clean": "rimraf dist",
+    "compile": "tsc",
+    "jest": "jest",
+    "test": "npm run build && npm run lint && npm run jest",
+    "lint": "tslint {src,test}/**/*.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Unibeautify/beautifier-tslint.git"
+  },
+  "keywords": [
+    "tslint",
+    "unibeautify",
+    "beautifier"
+  ],
+  "author": "Glavin Wiechert",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Unibeautify/beautifier-tslint/issues"
+  },
+  "homepage": "https://github.com/Unibeautify/beautifier-tslint#readme",
+  "peerDependencies": {
+    "unibeautify": "^0.10.1",
+    "tslint": "^5.9.1"
+  },
+  "devDependencies": {
+    "@types/jest": "^22.1.4",
+    "@types/node": "^9.4.7",
+    "@types/read-pkg-up": "^3.0.1",
+    "babel-jest": "^22.4.1",
+    "jest": "^22.4.2",
+    "rimraf": "^2.6.2",
+    "ts-jest": "^22.4.1",
+    "tslint": "^5.9.1",
+    "tslint-clean-code": "^0.2.5",
+    "tslint-microsoft-contrib": "^5.0.3",
+    "typescript": "^2.7.2",
+    "unibeautify": "^0.10.1"
+  },
+  "dependencies": {
+    "read-pkg-up": "^3.0.0"
+  }
+}
