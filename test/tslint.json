@@ -1,0 +1,16 @@
+{
+  "extends": [
+      "../tslint.json"
+  ],
+  "rules": {
+    "no-multiline-string": false,
+    "quotemark": false,
+    "trailing-comma": [
+      true,
+      {
+          "singleline": "never",
+          "multiline": "always"
+      }
+    ]
+  }
+}
