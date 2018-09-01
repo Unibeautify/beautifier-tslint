@@ -19,7 +19,7 @@ const options: BeautifierOptions = {
         switch (options.end_with_comma) {
           case true:
             return {
-              ruleArguments: [{"singleline": "always", "multiline": "always"}],
+              ruleArguments: [{ singleline: "always", multiline: "always" }],
             };
           default:
             return false;
