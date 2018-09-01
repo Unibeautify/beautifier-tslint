@@ -11,7 +11,7 @@
     "compile": "tsc",
     "jest": "jest",
     "test": "npm run build && npm run lint && npm run jest",
-    "lint": "tslint '{src,test}/**/*.ts'"
+    "lint": "tslint '{src,test}/**/*.ts' -e '**/fixtures/preferBeautifierConfig/**'"
   },
   "repository": {
     "type": "git",
@@ -36,6 +36,7 @@
     "@types/jest": "23.3.1",
     "@types/node": "10.9.4",
     "@types/read-pkg-up": "3.0.1",
+    "@types/tmp": "0.0.33",
     "jest": "23.5.0",
     "rimraf": "2.6.2",
     "ts-jest": "23.1.4",
@@ -46,6 +47,7 @@
     "unibeautify": "0.17.0"
   },
   "dependencies": {
-    "read-pkg-up": "^4.0.0"
+    "read-pkg-up": "^4.0.0",
+    "tmp": "0.0.33"
   }
 }

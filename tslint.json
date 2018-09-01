@@ -295,7 +295,7 @@
           true,
           {
               "singleline": "never",
-              "multiline": "always"
+              "multiline": "ignore"
           }
       ],
       "try-catch-first": true,

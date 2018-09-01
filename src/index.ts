@@ -6,10 +6,12 @@ import {
   NodeDependency,
 } from "unibeautify";
 import * as readPkgUp from "read-pkg-up";
-import options from "./options";
+import * as tmp from "tmp";
+import * as fs from "fs";
 import { Configuration, IOptions } from "tslint";
 import { IConfigurationFile } from "tslint/lib/configuration";
-import * as fs from "fs";
+
+import options from "./options";
 
 const { pkg } = readPkgUp.sync({ cwd: __dirname });
 export const beautifier: Beautifier = {
@@ -50,33 +52,73 @@ export const beautifier: Beautifier = {
     dependencies,
     beautifierConfig,
   }: BeautifierBeautifyData) {
-    return new Promise<string>((resolve, reject) => {
-      const { Linter } = dependencies.get<NodeDependency>("TSLint").package;
-      const linter = new Linter({
-        fix: true,
-        formatter: "prose",
-      });
-      const linterRules = new Map<string, Partial<IOptions>>();
-      Object.keys(options).forEach(key => {
-        linterRules.set(key, options[key]);
-      });
-      const linterOptions: IConfigurationFile = {
-        rulesDirectory: [],
-        extends: [],
-        rules: linterRules,
-        jsRules: new Map<string, Partial<IOptions>>(),
-      };
-      const configuration = (beautifierConfig && beautifierConfig.config) || linterOptions;
-      linter.lint("temp.ts", text, configuration);
-      const result = linter.getResult();
-      if (result.fixes && result.fixes.length > 0) {
-        const fixedText = fs.readFileSync("temp.ts", "utf8");
-        fs.unlinkSync("temp.ts");
-        return resolve(fixedText);
-      } else {
-        return resolve(text);
-      }
+    const { Linter } = dependencies.get<NodeDependency>("TSLint").package;
+    const linter = new Linter({
+      fix: true,
+      formatter: "prose",
     });
+    const linterRules = new Map<string, Partial<IOptions>>();
+    Object.keys(options).forEach(key => {
+      linterRules.set(key, options[key]);
+    });
+    const linterOptions: IConfigurationFile = {
+      rulesDirectory: [],
+      extends: [],
+      rules: linterRules,
+      jsRules: new Map<string, Partial<IOptions>>(),
+    };
+    const configuration = (beautifierConfig && beautifierConfig.config) || linterOptions;
+    return tmpFile({ postfix: ".ts" }).then(filePath =>
+      writeFile(filePath, text).then(() => {
+        linter.lint(filePath, text, configuration);
+        const result = linter.getResult();
+        if (result.fixes && result.fixes.length > 0) {
+          return readFile(filePath);
+        } else {
+          return Promise.resolve(text);
+        }
+      }),
+    );
   },
 };
+
+function tmpFile(options: tmp.Options): Promise<string> {
+  return new Promise<string>((resolve, reject) =>
+    tmp.file(
+      {
+        prefix: "unibeautify-",
+        ...options,
+      },
+      (err, path, fd) => {
+        if (err) {
+          return reject(err);
+        }
+        return resolve(path);
+      }
+    )
+  );
+}
+
+function writeFile(filePath: string, contents: string): Promise<void> {
+  return new Promise((resolve, reject) => {
+    fs.writeFile(filePath, contents, error => {
+      if (error) {
+        return reject(error);
+      }
+      return resolve();
+    });
+  });
+}
+
+function readFile(filePath: string): Promise<string> {
+  return new Promise((resolve, reject) => {
+    fs.readFile(filePath, (error, data) => {
+      if (error) {
+        return reject(error);
+      }
+      return resolve(data.toString());
+    });
+  });
+}
+
 export default beautifier;
