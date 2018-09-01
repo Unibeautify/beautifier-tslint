@@ -8,8 +8,8 @@ test(`should place a comma at the end of the typescript object`, () => {
   const unibeautify = newUnibeautify();
   unibeautify.loadBeautifier(beautifier);
   const text: string = fs
-  .readFileSync(path.resolve(__dirname, `../fixtures/test1.ts`))
-  .toString();
+    .readFileSync(path.resolve(__dirname, `../fixtures/test1.ts`))
+    .toString();
   return unibeautify
     .beautify({
       filePath,

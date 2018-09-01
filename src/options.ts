@@ -18,7 +18,9 @@ const options: BeautifierOptions = {
       (options): any => {
         switch (options.end_with_comma) {
           case true:
-            return {ruleArguments: [{"singleline": "always", "multiline": "always"}]};
+            return {
+              ruleArguments: [{"singleline": "always", "multiline": "always"}],
+            };
           default:
             return false;
         }

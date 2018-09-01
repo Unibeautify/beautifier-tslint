@@ -37,7 +37,7 @@ export const beautifier: Beautifier = {
     }
     const config = Configuration.findConfiguration(null, filePath).results;
     try {
-      return Promise.resolve({config});
+      return Promise.resolve({ config });
     } catch (error) {
       // tslint:disable-next-line:no-console
       console.error(error);
@@ -67,7 +67,8 @@ export const beautifier: Beautifier = {
       rules: linterRules,
       jsRules: new Map<string, Partial<IOptions>>(),
     };
-    const configuration = (beautifierConfig && beautifierConfig.config) || linterOptions;
+    const configuration =
+      (beautifierConfig && beautifierConfig.config) || linterOptions;
     return tmpFile({ postfix: ".ts" }).then(filePath =>
       writeFile(filePath, text).then(() => {
         linter.lint(filePath, text, configuration);
@@ -77,7 +78,7 @@ export const beautifier: Beautifier = {
         } else {
           return Promise.resolve(text);
         }
-      }),
+      })
     );
   },
 };

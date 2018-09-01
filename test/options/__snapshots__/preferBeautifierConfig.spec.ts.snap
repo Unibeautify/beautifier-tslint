@@ -2,8 +2,7 @@
 
 exports[`should place a comma at the end of the typescript object 1`] = `
 Object {
-  Symbol(raw): "
-export const beautifier = {
+  Symbol(raw): "export const beautifier = {
   TypeScript: {
     end_with_comma: true,
   },
