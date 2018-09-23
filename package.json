@@ -27,7 +27,7 @@
   "bugs": {
     "url": "https://github.com/Unibeautify/beautifier-tslint/issues"
   },
-  "homepage": "git+https://github.com/Unibeautify/beautifier-tslint#readme",
+  "homepage": "https://github.com/Unibeautify/beautifier-tslint#readme",
   "peerDependencies": {
     "unibeautify": ">= 0.12.1",
     "tslint": "^5.11.0"
