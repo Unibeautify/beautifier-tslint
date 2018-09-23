@@ -1,7 +1,7 @@
 {
   "name": "@unibeautify/beautifier-tslint",
   "version": "0.0.1",
-  "description": "tslint beautifier for Unibeautify",
+  "description": "TSLint beautifier for Unibeautify",
   "main": "dist/src/index.js",
   "typings": "dist/src/index.d.ts",
   "scripts": {
