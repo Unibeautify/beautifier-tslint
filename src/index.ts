@@ -83,7 +83,7 @@ export const beautifier: Beautifier = {
   },
 };
 
-function tmpFile(options: tmp.Options): Promise<string> {
+function tmpFile(options: tmp.FileOptions): Promise<string> {
   return new Promise<string>((resolve, reject) =>
     tmp.file(
       {
