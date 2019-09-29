@@ -13,7 +13,7 @@ import { IConfigurationFile } from "tslint/lib/configuration";
 
 import options from "./options";
 
-const pkg = readPkgUp.sync({ cwd: __dirname })!.package;
+const pkg = readPkgUp.sync({ cwd: __dirname })!.packageJson;
 export const beautifier: Beautifier = {
   name: "TSLint",
   package: pkg,
