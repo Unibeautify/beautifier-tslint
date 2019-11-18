@@ -33,7 +33,7 @@
     "tslint": "^5.11.0"
   },
   "devDependencies": {
-    "@types/node": "12.12.8",
+    "@types/node": "12.12.9",
     "@types/jest": "24.0.23",
     "@types/tmp": "0.1.0",
     "jest": "24.9.0",
